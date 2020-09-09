@@ -15,6 +15,14 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->longText('address');
+            $table->decimal('long', 10, 7);
+            $table->decimal('lat', 10, 7);
+            $table->unsignedInteger('manager_id');
+
+            //FOREIGN KEY CONSTRAINTS
+            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
