@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentsTable extends Migration
+class AddTeacherToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,11 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id();
-            
+        Schema::table('students', function (Blueprint $table) {
             $table->bigInteger('teacher_id')->unsigned()->nullable();
-            $table->bigInteger('user_id')->unsigned()->nullable();
 
             //FOREIGN KEY CONSTRAINTS
-            $table->foreign('user_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
-            
-            $table->timestamps();
         });
     }
 
@@ -34,6 +28,8 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::table('students', function (Blueprint $table) {
+            //
+        });
     }
 }

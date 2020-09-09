@@ -28,12 +28,12 @@ Route::group([
 
 Route::prefix('admin')->group(function () {
     Route::post('assign/student', 'AdminController@assign_student');
-    Route::get('users/list', 'AdminController@list');
+    Route::get('user/list', 'AdminController@list');
 });
 
 Route::prefix('superadmin')->group(function () {
     Route::post('assign/student', 'AdminController@assign_student');
-    Route::get('users/list', 'AdminController@list');
+    Route::get('users/lists', 'AdminController@list');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

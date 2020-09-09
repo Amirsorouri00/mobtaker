@@ -32,10 +32,11 @@ class AdminController extends Controller
 
     public function list(Request $request)
 	{
-        if ($user->hasRole('Admin')) {
+        if ($request->user()->hasRole('Admin') || $request->user()->hasRole('SuperAdmin')) {
             $list = Teacher::with('students')->get();
 
             return response(['data' => $list], 201);
         }
+        return response(['data' => $request->user()], 201);
     }
 }
