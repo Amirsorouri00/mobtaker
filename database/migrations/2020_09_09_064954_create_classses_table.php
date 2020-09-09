@@ -17,9 +17,9 @@ class CreateClasssesTable extends Migration
             $table->id();
             $table->string('name');
 
-            $table->unsignedInteger('school_id');
-            $table->unsignedInteger('course_id');
-            $table->unsignedInteger('teacher_id');
+            $table->bigInteger('school_id')->unsigned()->nullable();
+            $table->bigInteger('course_id')->unsigned()->nullable();
+            $table->bigInteger('teacher_id')->unsigned()->nullable();
 
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');

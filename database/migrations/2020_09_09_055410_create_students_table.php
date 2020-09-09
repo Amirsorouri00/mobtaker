@@ -15,14 +15,11 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-
-            $table->decimal('long', 10, 7);
-            $table->decimal('lat', 10, 7);
             
-            $table->unsignedInteger('teacher_id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
 
             //FOREIGN KEY CONSTRAINTS
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('teachers')->onDelete('cascade');
             
             $table->timestamps();
         });

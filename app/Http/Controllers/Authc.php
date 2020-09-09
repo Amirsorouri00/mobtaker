@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Validator;
-use App\User;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Student;
+use App\Teacher;
 
-
-class AuthController extends Controller {
-
+class Authc extends Controller
+{
+    //
     /**
      * Create a new AuthController instance.
      *
@@ -62,6 +63,23 @@ class AuthController extends Controller {
                     ['password' => bcrypt($request->password)]
                 ));
 
+        if ($request->has('role')) {
+            $role = $request->input('role');
+            if ($role == "student") {
+                $student = Student::create();
+                // $student.save();
+                $student->user()->associate($user);
+            }
+            elseif ($role == "teacher") {
+                $teacher = Teacher::create();
+                // $teacher.save();
+                $teacher->user()->associate($user);
+            }
+            else {
+                $user->assignRole('SuperAdmin');
+            }
+        }
+
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
@@ -113,5 +131,4 @@ class AuthController extends Controller {
             'user' => auth()->user()
         ]);
     }
-
 }

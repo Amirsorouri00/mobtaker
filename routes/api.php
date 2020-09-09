@@ -19,11 +19,21 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-    Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@register');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::get('user-profile', 'AuthController@userProfile');
+    Route::post('login', 'Authc@login');
+    Route::post('register', 'Authc@register');
+    Route::post('logout', 'Authc@logout');
+    Route::post('refresh', 'Authc@refresh');
+    Route::get('user-profile', 'Authc@userProfile');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::post('assign/student', 'AdminController@assign_student');
+    Route::get('users/list', 'AdminController@list');
+});
+
+Route::prefix('superadmin')->group(function () {
+    Route::post('assign/student', 'AdminController@assign_student');
+    Route::get('users/list', 'AdminController@list');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

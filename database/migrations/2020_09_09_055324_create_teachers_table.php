@@ -15,10 +15,8 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->decimal('long', 10, 7);
-            $table->decimal('lat', 10, 7);
             
-            $table->unsignedInteger('user_id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
 
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

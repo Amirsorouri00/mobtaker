@@ -19,10 +19,10 @@ class CreateSchoolsTable extends Migration
             $table->longText('address');
             $table->decimal('long', 10, 7);
             $table->decimal('lat', 10, 7);
-            $table->unsignedInteger('manager_id');
+            $table->bigInteger('user_id')->unsigned();
 
             //FOREIGN KEY CONSTRAINTS
-            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
