@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/roles', 'PermissionController@Permission');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
