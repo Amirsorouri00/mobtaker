@@ -21,3 +21,4 @@ Route::apiResource('schools', 'SchoolController');
 Route::apiResource('teachers', 'TeacherController'); 
 Route::apiResource('classes', 'ClassController'); 
 Route::apiResource('students', 'StudentController'); 
+Route::apiResource('courses', 'CourseController'); 
