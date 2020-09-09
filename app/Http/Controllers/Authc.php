@@ -74,6 +74,8 @@ class Authc extends Controller
                 $teacher = Teacher::create();
                 // $teacher.save();
                 $teacher->user()->associate($user);
+                $user->assignRole('Admin');
+
             }
             else {
                 $user->assignRole('SuperAdmin');

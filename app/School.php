@@ -16,4 +16,14 @@ class School extends Model
     protected $fillable = [
         'name', 'address', 'lat', 'long'
     ];
+
+    public function manager()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function classes()
+    {
+        return $this->hasMany('App\Classs');
+    }
 }

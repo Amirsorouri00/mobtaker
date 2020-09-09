@@ -5,6 +5,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 use App\Teacher;
+use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -18,12 +19,12 @@ class AdminController extends Controller
     
     public function assign_student(Request $request)
 	{
-        if ($user->hasRole('Admin')) {
+        if ($request->user()->hasRole('Admin') || $request->user()->hasRole('SuperAdmin')) {
             $stdID = $request->input('student_id');
             $teacherID = $request->input('teacher_id');
 
-            $student = Student::where('id', $stdID)->get();
-            $teacher = Teacher::where('id', $teacherID)->get();
+            $student = Student::where('id', $stdID)->first();
+            $teacher = Teacher::where('id', $teacherID)->first();
 
             $teacher->students()->save($student);
             return response(['data' => 'successfully added to the teacher'], 201);

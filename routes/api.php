@@ -32,8 +32,9 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('superadmin')->group(function () {
-    Route::post('assign/student', 'AdminController@assign_student');
-    Route::get('users/lists', 'AdminController@list');
+    Route::post('add/school', 'SuperAdminController@add_school');
+    Route::post('neareststudent/teacher', 'SuperAdminController@teacher_students');
+    Route::get('user/list', 'SuperAdminController@list');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
